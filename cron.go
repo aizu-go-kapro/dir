@@ -1,3 +1,4 @@
+//授業のある曜日にプログラム実行するためのcron用のパッケージ
 package dir
 
 const (
