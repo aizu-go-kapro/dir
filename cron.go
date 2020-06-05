@@ -1,29 +1,13 @@
 //授業のある曜日にプログラム実行するためのcron用のパッケージ
 package dir
 
-const (
-	SUNDAY = iota
-	MONDAY
-	TUESDAY
-	WEDNESDAY
-	THURSDAY
-	FRIDAY
-	SUTURDAY
-)
-
-type Cron struct{}
-
-//option for functional options pattern
-//type option func(*Cron)
-
-func NewCronJob(options ...func(*Cron)) (*Cron, error) {
-	return nil, nil
+//Schedulerは実行するjobと実行日を持たせる
+type Scheduler struct {
+	*Executor
+	Date []string
 }
 
-func SetDay(day uint) func(*Cron) {
-	return func(c *Cron) {}
-}
-
-func (c *Cron) Do() error {
+func (j *Scheduler) Do() error {
+	//TODO: cron job
 	return nil
 }

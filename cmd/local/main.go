@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("dir")
+	fmt.Println("local")
 }

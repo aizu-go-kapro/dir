@@ -4,43 +4,24 @@
 package dir
 
 import (
-	"log"
 	"os/exec"
 )
 
+//scriptファイルのパスを設定
 type Executor struct {
-	ScriptPath string
-	Args       []string
+	Path string
 }
 
-func NewExecutor(options ...func(*Executor)) *Executor {
-	executor := new(Executor)
-	for _, option := range options {
-		option(executor)
-	}
+func NewExecutor(path string) *Executor {
+	executor := &Executor{Path: path}
 	return executor
 }
 
-func SetCommand(src string) func(*Executor) {
-	return func(e *Executor) {
-		e.ScriptPath = src
-	}
-}
-
-func SetArgs(args ...string) func(*Executor) {
-	return func(e *Executor) {
-		for _, arg := range args {
-			e.Args = append(e.Args, arg)
-		}
-	}
-}
-
+//Pathに設定されたスクリプトを実行
 func (e *Executor) Do() error {
-	cmd := exec.Command(e.ScriptPath, e.Args...)
-	out, err := cmd.CombinedOutput()
-	if err != nil {
+	cmd := exec.Command(e.Path)
+	if err := cmd.Run(); err != nil {
 		return err
 	}
-	log.Printf("[STDOUT]: %s", string(out))
 	return nil
 }
